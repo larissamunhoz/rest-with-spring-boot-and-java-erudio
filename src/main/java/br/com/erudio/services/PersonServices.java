@@ -44,7 +44,7 @@ public class PersonServices {
 
 		logger.info("Creating one person!");
 
-		var entity = DozerMapper.parseObject(person, Person.class);
+		var entity = DozerMapper.parseObject(person, Person.class); //para salvar a entidade é feito o contrario (vo -> entity)
 		var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
 
 		return vo;

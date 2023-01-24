@@ -18,7 +18,7 @@ import br.com.erudio.data.vo.v1.PersonVO;
 import br.com.erudio.data.vo.v2.PersonVOV2;
 import br.com.erudio.services.PersonServices;
 
-@RestController
+@RestController //abrange  @ResponseBody(responsavel por devolver a resposta em json ou xml) e @Controller(responsavel por mapear as rotas)
 @RequestMapping("/person")
 public class PersonController {	
 	
