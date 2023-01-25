@@ -12,7 +12,7 @@ public class PersonVOV2 implements Serializable {
 	private String lastName;
 	private String address;
 	private String gender;
-	private Date birthDay;
+	private Date birthDay; //campo da nova versão
 
 	
 	public Date getBirthDay() {
