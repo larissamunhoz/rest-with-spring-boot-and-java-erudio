@@ -1,13 +1,17 @@
 package br.com.erudio.data.vo.v1;
 
+import com.github.dozermapper.core.Mapping;
+import org.springframework.hateoas.RepresentationModel;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PersonVO implements Serializable {
+public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	@Mapping("id")
+	private Long key;
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -17,13 +21,6 @@ public class PersonVO implements Serializable {
 
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getFirstName() {
 		return firstName;
@@ -31,6 +28,14 @@ public class PersonVO implements Serializable {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+
+	public Long getKey() {
+		return key;
+	}
+
+	public void setKey(Long key) {
+		this.key = key;
 	}
 
 	public String getLastName() {
@@ -59,7 +64,7 @@ public class PersonVO implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, firstName, gender, id, lastName);
+		return Objects.hash(address, firstName, gender, key, lastName);
 	}
 
 	@Override
@@ -72,7 +77,7 @@ public class PersonVO implements Serializable {
 			return false;
 		PersonVO other = (PersonVO) obj;
 		return Objects.equals(address, other.address) && Objects.equals(firstName, other.firstName)
-				&& Objects.equals(gender, other.gender) && Objects.equals(id, other.id)
+				&& Objects.equals(gender, other.gender) && Objects.equals(key, other.key)
 				&& Objects.equals(lastName, other.lastName);
 	}
 
