@@ -2,6 +2,7 @@ package br.com.erudio.unittests.mockito.services;
 
 import br.com.erudio.PersonRepository;
 import br.com.erudio.data.vo.v1.PersonVO;
+import br.com.erudio.exceptions.RequiredObjectIsNullException;
 import br.com.erudio.model.Person;
 import br.com.erudio.services.PersonServices;
 import br.com.erudio.unittests.mapper.mocks.MockPerson;
@@ -38,11 +39,11 @@ class PersonServicesTest {
     }
 
     @Test
-    void testfindAll() {
+    void testFindAll() {
     }
 
     @Test
-    void testfindById() {
+    void testFindById() {
         Person entity = input.mockEntity(1);
         entity.setId(1L);
 
@@ -61,7 +62,7 @@ class PersonServicesTest {
     }
 
     @Test
-    void testcreate() {
+    void testCreate() {
         Person entity = input.mockEntity(1);
         Person persisted = entity;
         persisted.setId(1L);
@@ -81,13 +82,24 @@ class PersonServicesTest {
         assertEquals("Last Name Test1", result.getLastName());
         assertEquals("Female", result.getGender());
     }
+    @Test
+    void testCreateWithNullPerson() {
+        Exception exception = assertThrows(RequiredObjectIsNullException.class, () ->{
+            services.create(null);
+        });
+
+        String expectedMessage = "It is not allowed to persist a null object!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+
+    }
 
     @Test
     void createV2() {
     }
 
     @Test
-    void testupdate() {
+    void testUpdate() {
         Person entity = input.mockEntity(1);
         entity.setId(1L);
 
@@ -112,7 +124,19 @@ class PersonServicesTest {
     }
 
     @Test
-    void delete() {
+    void testUpdateWithNullPerson() {
+        Exception exception = assertThrows(RequiredObjectIsNullException.class, () ->{
+            services.update(null);
+        });
+
+        String expectedMessage = "It is not allowed to persist a null object!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+
+    }
+
+    @Test
+    void testDelete() {
         Person entity = input.mockEntity(1);
         entity.setId(1L);
 
